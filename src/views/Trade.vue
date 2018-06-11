@@ -1,11 +1,19 @@
 <template>
   <el-container>
     <el-header>
-      <el-cascader placeholder="Futures ID" expand-trigger="hover" :options="futuresOptions" v-model="selectedFutures" clearable/>
-      <el-select v-model="selectedFirm" placeholder="Firm Name" style="margin-left: 20px;" clearable>
-        <el-option v-for="firm in firmOptions" :key="firm.firm_id" :label="firm.firm_name" :value="firm.firm_id"/>
-      </el-select>
-      <el-button style="margin-left: 20px;" icon="el-icon-search" @click="filter" circle/>
+      <el-row>
+        <el-col :span="5">
+          <el-cascader placeholder="Futures ID" expand-trigger="hover" :options="futuresOptions" v-model="selectedFutures" clearable/>
+        </el-col>
+        <el-col :span="5">
+          <el-select v-model="selectedFirm" placeholder="Firm Name" clearable>
+            <el-option v-for="firm in firmOptions" :key="firm.firm_id" :label="firm.firm_name" :value="firm.firm_id"/>
+          </el-select>
+        </el-col>
+        <el-col :span="1">
+          <el-button style="margin-left: 20px;" icon="el-icon-search" @click="filter" circle/>
+        </el-col>
+      </el-row>
     </el-header>
     <el-main>
         <el-table :data="tradeData" style="width: 100%" size="small" max-height="500" v-loading="loading">
