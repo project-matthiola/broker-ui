@@ -1,14 +1,41 @@
 import axios from 'axios'
+import store from '@/store'
 
 axios.defaults.baseURL = 'http://localhost:8080/server/api/v1/admin'
-axios.defaults.headers.common['Authorization'] = 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJTQUlUTyIsImV4cCI6MTUzNDk1Njc0MywianRpIjoiOTRjNmJjYjUtNmIwNi0xMWU4LWIxNzQtNmEwMDAyMjNkNTQwIiwiaWF0IjoxNTI4NDUzNjY0fQ.1vwUpnU4yiqd53S3Adr9mUEIofv9xyUHd8ZxiVJryiw'
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded'
 
+axios.interceptors.request.use(
+  config => {
+    if (store.state.token) {
+      config.headers.Authorization = `Bearer ${store.state.token}`
+    }
+    return config
+  },
+  error => {
+    return Promise.reject(error)
+  }
+)
+
+axios.interceptors.response.use(
+  response => {
+    return response
+  },
+  error => {
+    return Promise.reject(error.response.data)
+  }
+)
+
 export default {
+  FirmList: _ => {
+    return axios.get('/firms')
+  },
+  FuturesList: _ => {
+    return axios.get('/futures')
+  },
   OrderList: params => {
-    return axios.get('/orders', params)
+    return axios.get('/orders', { params: params })
   },
   TradeList: params => {
-    return axios.get('/trades', params)
+    return axios.get('/trades', { params: params })
   }
 }

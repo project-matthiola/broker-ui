@@ -8,9 +8,7 @@
         <el-aside>
           <Aside/>
         </el-aside>
-        <el-container>
-          <router-view/>
-        </el-container>
+        <router-view/>
       </el-container>
       <el-footer>
         <Footer/>
