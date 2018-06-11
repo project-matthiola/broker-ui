@@ -77,16 +77,10 @@ export default {
       .then(response => {
         this.futuresOptions = response.data.data
       })
-      .catch(error => {
-        console.log(error)
-      })
 
     api.FirmList()
       .then(response => {
         this.firmOptions = response.data.data
-      })
-      .catch(error => {
-        console.log(error)
       })
 
     let params = {
@@ -96,9 +90,6 @@ export default {
       .then(response => {
         this.orderData = response.data.data
         this.total = response.data.total
-      })
-      .catch(error => {
-        console.log(error)
       })
     this.loading = false
   },
@@ -114,9 +105,6 @@ export default {
           this.total = response.data.total
           this.loading = false
         })
-        .catch(error => {
-          console.log(error)
-        })
     },
     filter () {
       let params = {
@@ -130,9 +118,6 @@ export default {
           this.orderData = response.data.data
           this.total = response.data.total
           this.loading = false
-        })
-        .catch(error => {
-          console.log(error)
         })
     }
   }
